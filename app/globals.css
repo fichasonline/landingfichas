@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #05050a;
+  --foreground: rgba(255, 255, 255, 0.94);
+  --muted: rgba(232, 233, 239, 0.68);
+  --line: rgba(255, 255, 255, 0.1);
+  --panel: rgba(15, 15, 28, 0.72);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(143, 117, 255, 0.15), transparent 30%),
+    radial-gradient(circle at 85% 15%, rgba(124, 247, 255, 0.1), transparent 18%),
+    linear-gradient(180deg, #05050a 0%, #090914 42%, #05050a 100%);
+  color: var(--foreground);
+  font-family:
+    "Space Grotesk",
+    "Avenir Next",
+    "Segoe UI",
+    sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.24), transparent 90%);
+  content: "";
+  pointer-events: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+canvas {
+  display: block;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgba(9, 10, 18, 0.92) inset;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.92);
+}
+
+::selection {
+  background: rgba(143, 117, 255, 0.32);
+  color: white;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family:
+      "Space Grotesk",
+      "Avenir Next",
+      "Segoe UI",
+      sans-serif;
+    letter-spacing: -0.03em;
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply relative mx-auto w-full max-w-[1440px] overflow-x-hidden;
+  }
+
+  .section-shell {
+    @apply mx-auto w-full px-5 sm:px-6 md:px-12 lg:px-20 xl:px-24;
+  }
+
+  .section-space {
+    @apply pt-10 sm:pt-12 md:pt-16 lg:pt-24;
+  }
+
+  .panel {
+    @apply relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 shadow-card backdrop-blur-xl;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-violet/25 bg-violet/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-violet-soft;
+  }
+
+  .section-title {
+    @apply text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-[3rem];
+  }
+
+  .section-copy {
+    @apply max-w-2xl text-base leading-7 text-white/70 sm:text-lg;
+  }
+
+  .cta-primary {
+    @apply inline-flex items-center justify-center rounded-2xl bg-violet px-5 py-3.5 text-sm font-semibold text-white transition duration-200 hover:bg-[#9a82ff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet;
+  }
+
+  .cta-secondary {
+    @apply inline-flex items-center justify-center rounded-2xl border border-white/20 bg-white/5 px-5 py-3.5 text-sm font-semibold text-white/90 transition duration-200 hover:border-violet/40 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-medium text-white/90;
+  }
+
+  .input-shell {
+    @apply w-full rounded-2xl border border-white/10 bg-midnight/90 px-4 py-3.5 text-[15px] text-white outline-none transition placeholder:text-white/40 focus:border-violet/50 focus:ring-2 focus:ring-violet/20;
+  }
+
+  .fine-print {
+    @apply text-sm leading-6 text-white/60;
+  }
+}
