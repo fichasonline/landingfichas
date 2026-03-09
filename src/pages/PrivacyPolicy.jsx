@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
     return (
@@ -12,12 +11,12 @@ const PrivacyPolicy = () => {
 
             <div className="relative z-10 max-w-4xl mx-auto px-6 py-16 md:py-24">
                 {/* Navigation */}
-                <Link to="/" className="inline-flex items-center gap-2 mb-12 text-sm font-medium text-zinc-400 hover:text-white transition-colors group">
+                <a href="/" className="inline-flex items-center gap-2 mb-12 text-sm font-medium text-zinc-400 hover:text-white transition-colors group">
                     <svg className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                     Volver al Inicio
-                </Link>
+                </a>
 
                 {/* Header */}
                 <header className="mb-16">

@@ -1,16 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
 import Home from './pages/Home';
-import PrivacyPolicy from './pages/PrivacyPolicy';
+
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 
 function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/politicas-de-privacidad" element={<PrivacyPolicy />} />
-            </Routes>
-        </Router>
-    );
+    if (window.location.pathname === '/politicas-de-privacidad') {
+        return (
+            <Suspense fallback={null}>
+                <PrivacyPolicy />
+            </Suspense>
+        );
+    }
+
+    return <Home />;
 }
 
 export default App;

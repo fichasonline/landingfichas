@@ -19,7 +19,10 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Blauer Nue', sans-serif;
+}
+
+html {
+  background: #05020c;
 }
 
 body {
@@ -70,7 +73,10 @@ body {
   top: 218px;
   width: 193px;
   height: 113px;
-  object-fit: contain;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.92) 0%, rgba(196, 118, 255, 0.48) 38%, rgba(173, 73, 255, 0.18) 62%, rgba(173, 73, 255, 0) 100%);
+  filter: blur(6px);
 }
 
 .hero-bottom-band {
@@ -161,7 +167,10 @@ body {
   top: 421px;
   width: 300px;
   height: 36px;
-  object-fit: fill;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(26, 14, 35, 0.72) 0%, rgba(34, 18, 46, 0.15) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.14);
   z-index: 1;
   pointer-events: none;
 }
@@ -244,14 +253,61 @@ body {
 .info-head {
   position: relative;
   height: 426px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 24% 24%, rgba(173, 73, 255, 0.72) 0%, rgba(173, 73, 255, 0) 44%),
+    radial-gradient(circle at 78% 34%, rgba(0, 212, 46, 0.3) 0%, rgba(0, 212, 46, 0) 28%),
+    linear-gradient(180deg, #130a19 0%, #241132 100%);
 }
 
-.info-head img {
+.info-head-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(24px);
+  opacity: 0.85;
+}
+
+.info-head-glow-primary {
+  left: -34px;
+  top: 86px;
+  width: 210px;
+  height: 210px;
+  background: rgba(189, 110, 255, 0.72);
+}
+
+.info-head-glow-secondary {
+  right: -18px;
+  top: 58px;
+  width: 168px;
+  height: 168px;
+  background: rgba(0, 212, 46, 0.32);
+}
+
+.info-head-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.info-head-image-base {
+  opacity: 0.92;
+}
+
+.info-head-image-overlay {
+  z-index: 1;
+}
+
+.info-head-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.1), #000 26%, #000 74%, transparent);
+  z-index: 2;
 }
 
 .info-copy {
@@ -294,25 +350,47 @@ body {
   text-transform: uppercase;
 }
 
+.split-block {
+  min-height: 360px;
+  padding: 86px 22px 46px;
+  position: relative;
+  display: grid;
+  place-content: center;
+  gap: 26px;
+  isolation: isolate;
+}
+
 .split-top {
-  background: var(--bg-dark);
-  background-image: linear-gradient(rgba(25, 14, 32, 0.68), rgba(25, 14, 32, 0.68)), url('/svg/GRILLA.png');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: #130a1b;
 }
 
 .split-bottom {
   background: var(--violet-deep);
-  background-image: linear-gradient(rgba(63, 21, 96, 0.62), rgba(63, 21, 96, 0.62)), url('/svg/TORNEOS.png');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
-.split-block {
-  min-height: 360px;
-  padding: 86px 22px 46px;
+.split-media,
+.split-scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.split-media {
+  object-fit: cover;
+}
+
+.split-scrim {
+  background: linear-gradient(rgba(25, 14, 32, 0.62), rgba(25, 14, 32, 0.76));
+}
+
+.split-bottom .split-scrim {
+  background: linear-gradient(rgba(63, 21, 96, 0.5), rgba(63, 21, 96, 0.78));
+}
+
+.split-content {
+  position: relative;
+  z-index: 1;
   display: grid;
   place-content: center;
   gap: 26px;
@@ -414,7 +492,7 @@ body {
   width: 352px;
   height: auto;
   max-width: calc(100% - 40px);
-  object-fit: initial;
+  object-fit: contain;
   display: block;
   margin: 0 auto;
 }
@@ -425,7 +503,15 @@ body {
   top: -52px;
   transform: translateX(-50%);
   width: 378px;
+  height: auto;
   object-fit: contain;
+}
+
+.info-section,
+.split-section,
+.whatsapp-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 860px;
 }
 
 @media (min-width: 600px) {

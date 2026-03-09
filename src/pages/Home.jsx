@@ -1,13 +1,22 @@
 ﻿import React, { useState } from 'react';
-import { sendContactEvent, sendSubscribeEvent } from '../services/metaConversions';
 
 const HERO_BG = '/svg/PORTADA.webp';
-const HERO_GLOW = 'https://www.figma.com/api/mcp/asset/8cbd90f6-0d21-4018-80d9-5703e2918744';
-const HERO_CTA_BG = 'https://www.figma.com/api/mcp/asset/88db89b2-8fd1-4d38-a4d1-e57442720016';
 const LOGO_GLOW = '/svg/LOGO%20CON%20LUZ.svg';
 const INFO_BG = 'https://www.figma.com/api/mcp/asset/e8fb845f-35ff-4694-b25d-aff80b692f9e';
 const INFO_OVERLAY = 'https://www.figma.com/api/mcp/asset/d2ac79f0-89fd-43e7-bda2-b85d5c208fc2';
-const WSP_TOP_PNG = '/svg/PNG%20WSP%20-%20FICHAS.png';
+const WSP_TOP_PNG = '/landing/whatsapp-top.png';
+const GRILLA_BG = '/landing/grilla-mobile.jpg';
+const TORNEOS_BG = '/landing/torneos-mobile.jpg';
+
+let trackingModulePromise;
+
+const loadTrackingModule = () => {
+  if (!trackingModulePromise) {
+    trackingModulePromise = import('../services/metaConversions');
+  }
+
+  return trackingModulePromise;
+};
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -18,7 +27,8 @@ export default function Home() {
     e.preventDefault();
     setStatus('loading');
     try {
-      sendSubscribeEvent({ email });
+      const { sendSubscribeEvent } = await loadTrackingModule();
+      void sendSubscribeEvent({ email });
       setTimeout(() => {
         setStatus('success');
         setEmail('');
@@ -29,21 +39,38 @@ export default function Home() {
     }
   };
 
-  const handleWhatsAppClick = () => {
-    sendContactEvent({ phone });
+  const handleWhatsAppClick = async () => {
+    const { sendContactEvent } = await loadTrackingModule();
+    void sendContactEvent({ phone });
   };
 
   return (
     <div className="mobile-landing">
       <section className="section hero-section">
         <div className="hero-top-wrap">
-          <img className="hero-bg" src={HERO_BG} alt="" />
+          <img
+            className="hero-bg"
+            src={HERO_BG}
+            alt=""
+            width="559"
+            height="426"
+            fetchPriority="high"
+            decoding="async"
+          />
         </div>
-        <img className="hero-ellipse" src={HERO_GLOW} alt="" aria-hidden="true" />
+        <div className="hero-ellipse" aria-hidden="true" />
         <div className="hero-bottom-band" />
 
         <div className="hero-content">
-          <img className="hero-logo" src={LOGO_GLOW} alt="Fichas Online" />
+          <img
+            className="hero-logo"
+            src={LOGO_GLOW}
+            alt="Fichas Online"
+            width="249"
+            height="117"
+            fetchPriority="high"
+            decoding="async"
+          />
           <p className="hero-label">DEJA TU CORREO ACA</p>
 
           <form className="hero-form" onSubmit={handleEmailSubmit}>
@@ -74,13 +101,32 @@ export default function Home() {
           </p>
         </div>
 
-        <img className="hero-cta-shape" src={HERO_CTA_BG} alt="" aria-hidden="true" />
+        <div className="hero-cta-shape" aria-hidden="true" />
       </section>
 
       <section className="section info-section">
-        <div className="info-head">
-          <img src={INFO_BG} alt="" />
-          <img src={INFO_OVERLAY} alt="" />
+        <div className="info-head" aria-hidden="true">
+          <div className="info-head-glow info-head-glow-primary" />
+          <div className="info-head-glow info-head-glow-secondary" />
+          <img
+            className="info-head-image info-head-image-base"
+            src={INFO_BG}
+            alt=""
+            width="393"
+            height="426"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            className="info-head-image info-head-image-overlay"
+            src={INFO_OVERLAY}
+            alt=""
+            width="393"
+            height="426"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="info-head-grid" />
         </div>
         <div className="info-copy">
           <h2>
@@ -102,20 +148,53 @@ export default function Home() {
 
       <section className="section split-section">
         <div className="split-block split-top">
-          <h3>GRILLA</h3>
-          <p>
-            ACCEDE A LA SELECCION MAS PRECISA DE MESAS Y EVENTOS, FILTRADA POR CALIDAD Y RELEVANCIA TECNOLOGICA.
-          </p>
+          <img
+            className="split-media"
+            src={GRILLA_BG}
+            alt=""
+            width="393"
+            height="360"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="split-scrim" aria-hidden="true" />
+          <div className="split-content">
+            <h3>GRILLA</h3>
+            <p>
+              ACCEDE A LA SELECCION MAS PRECISA DE MESAS Y EVENTOS, FILTRADA POR CALIDAD Y RELEVANCIA TECNOLOGICA.
+            </p>
+          </div>
         </div>
         <div className="split-block split-bottom">
-          <h3>TORNEOS</h3>
-          <p>NO TE PIERDAS NINGUNA INSCRIPCION. RECIBE ALERTAS EN TIEMPO REAL DE LOS TORNEOS MAS IMPORTANTES DEL ECOSISTEMA.</p>
+          <img
+            className="split-media"
+            src={TORNEOS_BG}
+            alt=""
+            width="393"
+            height="360"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="split-scrim" aria-hidden="true" />
+          <div className="split-content">
+            <h3>TORNEOS</h3>
+            <p>NO TE PIERDAS NINGUNA INSCRIPCION. RECIBE ALERTAS EN TIEMPO REAL DE LOS TORNEOS MAS IMPORTANTES DEL ECOSISTEMA.</p>
+          </div>
         </div>
       </section>
 
       <section className="section whatsapp-section">
         <div className="whatsapp-main">
-          <img className="whatsapp-top-image" src={WSP_TOP_PNG} alt="" aria-hidden="true" />
+          <img
+            className="whatsapp-top-image"
+            src={WSP_TOP_PNG}
+            alt=""
+            aria-hidden="true"
+            width="378"
+            height="250"
+            loading="lazy"
+            decoding="async"
+          />
 
           <h2>¿PREFIERES ENTERARTE POR WHATSAPP?</h2>
           <p className="whatsapp-copy">
@@ -129,7 +208,7 @@ export default function Home() {
           </a>
         </div>
         <div className="whatsapp-footer">
-          <img src={LOGO_GLOW} alt="Fichas Online" />
+          <img src={LOGO_GLOW} alt="Fichas Online" width="352" height="166" loading="lazy" decoding="async" />
         </div>
       </section>
     </div>
