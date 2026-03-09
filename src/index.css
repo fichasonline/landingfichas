@@ -2,8 +2,367 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+@font-face {
+  font-family: 'Blauer Nue';
+  src: url('/fonts/BlauerNue-Bold.otf') format('opentype');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --bg-dark: #190e20;
+  --violet: #ad49ff;
+  --violet-deep: #3f1560;
+  --green: #00d42e;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Blauer Nue', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: 'Blauer Nue', sans-serif;
+  background: #05020c;
+  color: #ffffff;
+}
+
+.mobile-landing {
+  width: 100%;
+  max-width: 393px;
+  margin: 0 auto;
+  background: #ffffff;
+  font-size: 19px;
+}
+
+.section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-section {
+  min-height: 852px;
+  background: var(--bg-dark);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(25, 14, 32, 0.15), rgba(25, 14, 32, 0.65) 52%, rgba(25, 14, 32, 0.95));
+}
+
+.section-content {
+  position: relative;
+  z-index: 2;
+  padding: 330px 16px 22px;
+  text-align: center;
+}
+
+.logo-glow {
+  width: 250px;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.hero-label {
+  margin: 10px 0 8px;
+  font-size: 19px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.hero-form {
+  display: grid;
+  gap: 12px;
+}
+
+.hero-form input,
+.whatsapp-main input {
+  width: 100%;
+  border: none;
+  border-radius: 15px;
+  background: #d9d9d9;
+  color: #666666;
+  padding: 13px 16px;
+  text-align: center;
+  font-size: 19px;
+  font-weight: 700;
+  outline: none;
+}
+
+.hero-form input::placeholder,
+.whatsapp-main input::placeholder {
+  color: #6f6f6f;
+}
+
+.hero-form button {
+  border: none;
+  border-radius: 999px;
+  padding: 13px 16px;
+  background: var(--green);
+  color: #1c0f2c;
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 0 0 4px rgba(17, 12, 33, 0.45), 0 0 22px rgba(0, 212, 46, 0.6);
+}
+
+.hero-form button:disabled {
+  opacity: 0.75;
+}
+
+.cta-section .cta-dark {
+  background: var(--bg-dark);
+  padding: 54px 22px 48px;
+}
+
+.cta-section h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 42px;
+  line-height: 0.93;
+  font-weight: 500;
+  text-shadow: 0 4px 16.4px rgba(255, 255, 255, 0.25), 0 0 1px rgba(255, 255, 255, 0.65);
+}
+
+.cta-section h1 span {
+  display: block;
+}
+
+.cta-section .violet {
+  color: var(--violet);
+  font-weight: 900;
+}
+
+.cta-green {
+  background: linear-gradient(90deg, #8d3ce6 0%, #b853ff 100%);
+  padding: 40px 22px 46px;
+}
+
+.cta-green p {
+  margin: 0;
+  color: #0d0315;
+  text-align: center;
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.info-head {
+  position: relative;
+  height: 426px;
+}
+
+.info-head img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-copy {
+  background: var(--bg-dark);
+  padding: 54px 20px 34px;
+}
+
+.info-copy h2 {
+  margin: 0;
+  text-align: center;
+  font-size: 42px;
+  line-height: 0.88;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-shadow: 0 4px 16.4px rgba(255, 255, 255, 0.25), 0 0 1px rgba(255, 255, 255, 0.65);
+}
+
+.info-copy .violet {
+  color: var(--violet);
+  font-weight: 900;
+}
+
+.info-copy .green {
+  color: var(--green);
+  font-weight: 900;
+}
+
+.info-foot {
+  background: var(--green);
+  padding: 38px 20px 44px;
+}
+
+.info-foot p {
+  margin: 0;
+  color: #05020c;
+  text-align: center;
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.split-top {
+  background: var(--bg-dark);
+}
+
+.split-bottom {
+  background: var(--violet-deep);
+}
+
+.split-block {
+  min-height: 360px;
+  padding: 86px 22px 46px;
+  display: grid;
+  place-content: center;
+  gap: 26px;
+}
+
+.split-block h3 {
+  margin: 0;
+  text-align: center;
+  color: var(--violet);
+  font-size: 42px;
+  line-height: 0.9;
+  font-weight: 800;
+  text-shadow: 0 4px 16.4px rgba(255, 255, 255, 0.25), 0 0 1px rgba(255, 255, 255, 0.65);
+}
+
+.split-block p {
+  margin: 0;
+  text-align: center;
+  color: var(--violet);
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.whatsapp-main {
+  background: var(--green);
+  min-height: 609px;
+  padding: 218px 29px 53px;
+  text-align: center;
+  position: relative;
+}
+
+.whatsapp-main h2 {
+  margin: 0;
+  color: var(--violet-deep);
+  font-size: 42px;
+  line-height: 0.96;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-shadow: 0 4px 16.4px rgba(255, 255, 255, 0.25), 0 0 1px rgba(255, 255, 255, 0.65);
+}
+
+.whatsapp-main .whatsapp-copy {
+  margin: 26px 0 0;
+  color: #ffffff;
+  font-size: 19px;
+  line-height: 0.99;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.whatsapp-main .small-label {
+  margin-top: 19px;
+  color: var(--violet-deep);
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.whatsapp-main input {
+  margin-top: 11px;
+  width: 300px;
+  max-width: 100%;
+  height: 48px;
+  border-radius: 15px;
+  color: #7b7b7b;
+  font-size: 19px;
+  font-weight: 800;
+  padding-inline: 12px;
+}
+
+.whatsapp-main a {
+  margin: 13px auto 0;
+  width: 256px;
+  max-width: 100%;
+  height: 38px;
+  border-radius: 29px;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  background: var(--violet-deep);
+  color: #d9d9d9;
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.whatsapp-footer {
+  background: var(--bg-dark);
+  min-height: 264px;
+  padding: 87px 0 0;
+  text-align: center;
+}
+
+.whatsapp-footer img {
+  width: 249px;
+  height: 59px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.whatsapp-icons {
+  position: absolute;
+  inset: 0 auto auto 0;
+}
+
+.whatsapp-badge {
+  position: absolute;
+  left: -18px;
+  top: -47px;
+  width: 286px;
+  height: 286px;
+  object-fit: cover;
+  filter: blur(0.95px);
+  box-shadow: 70px 4px 153.3px 0 rgba(140, 0, 255, 0.6), -12px 33px 44.6px 0 rgba(255, 255, 255, 0.25);
+}
+
+.community-badge {
+  position: absolute;
+  left: 182px;
+  top: 48px;
+  width: 142px;
+  height: 142px;
+  object-fit: contain;
+}
+
+@media (min-width: 600px) {
   body {
-    @apply bg-zinc-950 text-slate-50;
+    padding: 18px 0;
+  }
+
+  .mobile-landing {
+    border-radius: 18px;
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.6);
   }
 }
