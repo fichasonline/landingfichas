@@ -34,7 +34,7 @@ body {
   max-width: 393px;
   margin: 0 auto;
   background: #ffffff;
-  font-size: 19px;
+  font-size: 15px;
 }
 
 .section {
@@ -48,6 +48,14 @@ body {
   background: var(--bg-dark);
 }
 
+.hero-top-wrap {
+  position: absolute;
+  top: 0;
+  left: -75px;
+  width: 559px;
+  height: 426px;
+}
+
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -56,29 +64,41 @@ body {
   object-fit: cover;
 }
 
-.hero-overlay {
+.hero-ellipse {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(25, 14, 32, 0.15), rgba(25, 14, 32, 0.65) 52%, rgba(25, 14, 32, 0.95));
+  left: 108px;
+  top: 218px;
+  width: 193px;
+  height: 113px;
+  object-fit: contain;
 }
 
-.section-content {
+.hero-bottom-band {
+  position: absolute;
+  left: -18px;
+  top: 685px;
+  width: 445px;
+  height: 173px;
+  background: linear-gradient(90deg, #8d3ce6 0%, #b853ff 100%);
+}
+
+.hero-content {
   position: relative;
   z-index: 2;
-  padding: 330px 16px 22px;
+  padding: 244px 0 0;
   text-align: center;
 }
 
-.logo-glow {
-  width: 250px;
+.hero-logo {
+  width: 249px;
   max-width: 100%;
   display: block;
   margin: 0 auto;
 }
 
 .hero-label {
-  margin: 10px 0 8px;
-  font-size: 19px;
+  margin: 11px 0 9px;
+  font-size: 15px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -86,19 +106,21 @@ body {
 
 .hero-form {
   display: grid;
-  gap: 12px;
+  justify-items: center;
+  gap: 11px;
 }
 
 .hero-form input,
 .whatsapp-main input {
-  width: 100%;
+  width: 300px;
+  max-width: 100%;
   border: none;
   border-radius: 15px;
   background: #d9d9d9;
-  color: #666666;
+  color: #6f6f6f;
   padding: 13px 16px;
   text-align: center;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: 700;
   outline: none;
 }
@@ -111,10 +133,13 @@ body {
 .hero-form button {
   border: none;
   border-radius: 999px;
-  padding: 13px 16px;
+  width: 300px;
+  max-width: 100%;
+  height: 36px;
+  padding: 0 16px;
   background: var(--green);
   color: #1c0f2c;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: 900;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -123,6 +148,59 @@ body {
 
 .hero-form button:disabled {
   opacity: 0.75;
+}
+
+.hero-cta-btn {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-cta-shape {
+  position: absolute;
+  left: 46px;
+  top: 421px;
+  width: 300px;
+  height: 36px;
+  object-fit: fill;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-title-main {
+  margin: 27px auto 0;
+  width: 294px;
+  font-size: 42px;
+  line-height: 0.93;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-shadow: 0 4px 16.4px rgba(255, 255, 255, 0.25), 0 0 1px rgba(255, 255, 255, 0.65);
+}
+
+.hero-title-main span {
+  display: block;
+}
+
+.hero-title-main .violet {
+  color: var(--violet);
+  font-weight: 900;
+}
+
+.hero-copy-main {
+  margin: 0;
+  position: absolute;
+  top: 685px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 327px;
+  height: 173px;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #0d0315;
+  text-align: center;
 }
 
 .cta-section .cta-dark {
@@ -157,7 +235,7 @@ body {
   margin: 0;
   color: #0d0315;
   text-align: center;
-  font-size: 19px;
+  font-size: 15px;
   line-height: 1;
   font-weight: 900;
   text-transform: uppercase;
@@ -210,7 +288,7 @@ body {
   margin: 0;
   color: #05020c;
   text-align: center;
-  font-size: 19px;
+  font-size: 15px;
   line-height: 1;
   font-weight: 900;
   text-transform: uppercase;
@@ -218,10 +296,18 @@ body {
 
 .split-top {
   background: var(--bg-dark);
+  background-image: linear-gradient(rgba(25, 14, 32, 0.68), rgba(25, 14, 32, 0.68)), url('/svg/GRILLA.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .split-bottom {
   background: var(--violet-deep);
+  background-image: linear-gradient(rgba(63, 21, 96, 0.62), rgba(63, 21, 96, 0.62)), url('/svg/TORNEOS.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .split-block {
@@ -235,7 +321,7 @@ body {
 .split-block h3 {
   margin: 0;
   text-align: center;
-  color: var(--violet);
+  color: #ffffff;
   font-size: 42px;
   line-height: 0.9;
   font-weight: 800;
@@ -245,8 +331,8 @@ body {
 .split-block p {
   margin: 0;
   text-align: center;
-  color: var(--violet);
-  font-size: 19px;
+  color: #ffffff;
+  font-size: 15px;
   line-height: 1;
   font-weight: 800;
   text-transform: uppercase;
@@ -273,7 +359,7 @@ body {
 .whatsapp-main .whatsapp-copy {
   margin: 26px 0 0;
   color: #ffffff;
-  font-size: 19px;
+  font-size: 15px;
   line-height: 0.99;
   font-weight: 800;
   text-transform: uppercase;
@@ -282,7 +368,7 @@ body {
 .whatsapp-main .small-label {
   margin-top: 19px;
   color: var(--violet-deep);
-  font-size: 19px;
+  font-size: 15px;
   line-height: 1;
   font-weight: 800;
   text-transform: uppercase;
@@ -295,7 +381,7 @@ body {
   height: 48px;
   border-radius: 15px;
   color: #7b7b7b;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: 800;
   padding-inline: 12px;
 }
@@ -311,7 +397,7 @@ body {
   text-decoration: none;
   background: var(--violet-deep);
   color: #d9d9d9;
-  font-size: 19px;
+  font-size: 15px;
   line-height: 1;
   font-weight: 800;
   text-transform: uppercase;
@@ -320,39 +406,25 @@ body {
 .whatsapp-footer {
   background: var(--bg-dark);
   min-height: 264px;
-  padding: 87px 0 0;
+  padding: 76px 0 0;
   text-align: center;
 }
 
 .whatsapp-footer img {
-  width: 249px;
-  height: 59px;
-  max-width: 100%;
-  object-fit: contain;
+  width: 352px;
+  height: auto;
+  max-width: calc(100% - 40px);
+  object-fit: initial;
+  display: block;
+  margin: 0 auto;
 }
 
-.whatsapp-icons {
+.whatsapp-top-image {
   position: absolute;
-  inset: 0 auto auto 0;
-}
-
-.whatsapp-badge {
-  position: absolute;
-  left: -18px;
-  top: -47px;
-  width: 286px;
-  height: 286px;
-  object-fit: cover;
-  filter: blur(0.95px);
-  box-shadow: 70px 4px 153.3px 0 rgba(140, 0, 255, 0.6), -12px 33px 44.6px 0 rgba(255, 255, 255, 0.25);
-}
-
-.community-badge {
-  position: absolute;
-  left: 182px;
-  top: 48px;
-  width: 142px;
-  height: 142px;
+  left: 50%;
+  top: -52px;
+  transform: translateX(-50%);
+  width: 378px;
   object-fit: contain;
 }
 

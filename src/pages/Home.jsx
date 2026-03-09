@@ -1,12 +1,13 @@
 ﻿import React, { useState } from 'react';
 import { sendContactEvent, sendSubscribeEvent } from '../services/metaConversions';
 
-const HERO_BG = 'https://www.figma.com/api/mcp/asset/2264c271-a413-4c73-910a-75ef1809fdae';
+const HERO_BG = '/svg/PORTADA.webp';
+const HERO_GLOW = 'https://www.figma.com/api/mcp/asset/8cbd90f6-0d21-4018-80d9-5703e2918744';
+const HERO_CTA_BG = 'https://www.figma.com/api/mcp/asset/88db89b2-8fd1-4d38-a4d1-e57442720016';
 const LOGO_GLOW = '/svg/LOGO%20CON%20LUZ.svg';
 const INFO_BG = 'https://www.figma.com/api/mcp/asset/e8fb845f-35ff-4694-b25d-aff80b692f9e';
 const INFO_OVERLAY = 'https://www.figma.com/api/mcp/asset/d2ac79f0-89fd-43e7-bda2-b85d5c208fc2';
-const WHATSAPP_BADGE = 'https://www.figma.com/api/mcp/asset/3a37efef-be3a-4f59-a03e-99b934b2b217';
-const COMMUNITY_BADGE = 'https://www.figma.com/api/mcp/asset/7e645c2a-2238-4a68-aa9d-462f02a37f5f';
+const WSP_TOP_PNG = '/svg/PNG%20WSP%20-%20FICHAS.png';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -35,12 +36,14 @@ export default function Home() {
   return (
     <div className="mobile-landing">
       <section className="section hero-section">
-        <img className="hero-bg" src={HERO_BG} alt="" />
-        <div className="hero-overlay" />
+        <div className="hero-top-wrap">
+          <img className="hero-bg" src={HERO_BG} alt="" />
+        </div>
+        <img className="hero-ellipse" src={HERO_GLOW} alt="" aria-hidden="true" />
+        <div className="hero-bottom-band" />
 
-        <div className="section-content">
-          <img className="logo-glow" src={LOGO_GLOW} alt="Fichas Online" />
-
+        <div className="hero-content">
+          <img className="hero-logo" src={LOGO_GLOW} alt="Fichas Online" />
           <p className="hero-label">DEJA TU CORREO ACA</p>
 
           <form className="hero-form" onSubmit={handleEmailSubmit}>
@@ -52,29 +55,26 @@ export default function Home() {
               disabled={status === 'loading' || status === 'success'}
               required
             />
-            <button type="submit" disabled={status === 'loading' || status === 'success'}>
+            <button className="hero-cta-btn" type="submit" disabled={status === 'loading' || status === 'success'}>
               {status === 'idle' && 'SUMATE A LA COMUNIDAD'}
               {status === 'loading' && 'ENVIANDO...'}
               {status === 'success' && 'YA ESTAS ADENTRO'}
             </button>
           </form>
-        </div>
-      </section>
 
-      <section className="section cta-section">
-        <div className="cta-dark">
-          <h1>
+          <h1 className="hero-title-main">
             <span>UNITE A LA</span>
             <span className="violet">COMUNIDAD</span>
             <span>Y ENTERATE</span>
             <span>DE TODO</span>
           </h1>
-        </div>
-        <div className="cta-green">
-          <p>
+
+          <p className="hero-copy-main">
             RECIBE ANTES QUE NADIE LA INFORMACION EXCLUSIVA DE LOS MEJORES EVENTOS, TORNEOS Y MESAS DEL CIRCUITO.
           </p>
         </div>
+
+        <img className="hero-cta-shape" src={HERO_CTA_BG} alt="" aria-hidden="true" />
       </section>
 
       <section className="section info-section">
@@ -115,10 +115,7 @@ export default function Home() {
 
       <section className="section whatsapp-section">
         <div className="whatsapp-main">
-          <div className="whatsapp-icons" aria-hidden="true">
-            <img className="whatsapp-badge" src={WHATSAPP_BADGE} alt="" />
-            <img className="community-badge" src={COMMUNITY_BADGE} alt="" />
-          </div>
+          <img className="whatsapp-top-image" src={WSP_TOP_PNG} alt="" aria-hidden="true" />
 
           <h2>¿PREFIERES ENTERARTE POR WHATSAPP?</h2>
           <p className="whatsapp-copy">
