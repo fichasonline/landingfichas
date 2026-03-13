@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 
 const HERO_BG = '/svg/PORTADA.webp';
@@ -31,7 +31,9 @@ export default function Home() {
     try {
       const { sendSubscribeEvent } = await loadTrackingModule();
       void sendSubscribeEvent({ email });
-      void supabase.from('support_leads').insert({ email, source: 'landing_email' });
+      supabase.from('support_leads').insert({ email, source: 'landing_email' }).then(({ error }) => {
+        if (error) console.error('Error guardando lead email:', error);
+      });
       setTimeout(() => {
         setStatus('success');
         setEmail('');
@@ -43,13 +45,13 @@ export default function Home() {
   };
 
   const handleWhatsAppClick = async (e) => {
-    if (!phone.trim()) {
-      e.preventDefault();
-      return;
-    }
+    e.preventDefault();
+    if (!phone.trim()) return;
     const { sendContactEvent } = await loadTrackingModule();
     void sendContactEvent({ phone });
-    void supabase.from('support_leads').insert({ phone, source: 'landing_whatsapp' });
+    const { error } = await supabase.from('support_leads').insert({ phone, source: 'landing_whatsapp' });
+    if (error) console.error('Error guardando lead whatsapp:', error);
+    window.location.href = '/gracias';
   };
 
   return (
