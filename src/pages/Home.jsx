@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+﻿import { useRef, useState } from 'react';
 import { supabase } from '../lib/supabase';
 
 const HERO_BG = '/svg/PORTADA.webp';
@@ -23,6 +23,15 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle');
   const [phone, setPhone] = useState('');
+  const whatsappSectionRef = useRef(null);
+  const whatsappInputRef = useRef(null);
+
+  const redirectToWhatsAppSection = () => {
+    whatsappSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => {
+      whatsappInputRef.current?.focus({ preventScroll: true });
+    }, 400);
+  };
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +46,7 @@ export default function Home() {
       setTimeout(() => {
         setStatus('success');
         setEmail('');
+        redirectToWhatsAppSection();
       }, 1200);
     } catch (error) {
       console.error('Error enviando suscripcion:', error);
@@ -193,7 +203,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section whatsapp-section">
+      <section ref={whatsappSectionRef} className="section whatsapp-section">
         <div className="whatsapp-main">
           <img
             className="whatsapp-top-image"
@@ -212,7 +222,13 @@ export default function Home() {
             MANTENDREMOS INFORMADO AL INSTANTE.
           </p>
           <p className="small-label">DEJÁ TU NUMERO PARA MÁS INFO</p>
-          <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="099 000 000" />
+          <input
+            ref={whatsappInputRef}
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="099 000 000"
+          />
           <a href="https://wa.me/SU_NUMERO_AQUI" target="_blank" rel="noopener noreferrer" onClick={handleWhatsAppClick}>
             SUMATÉ A LA COMUNIDAD
           </a>
