@@ -1,4 +1,5 @@
 ﻿import React, { useState } from 'react';
+import { supabase } from '../lib/supabase';
 
 const HERO_BG = '/svg/PORTADA.webp';
 const LOGO_GLOW = '/svg/LOGO%20CON%20LUZ.svg';
@@ -25,10 +26,12 @@ export default function Home() {
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
+    if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) return;
     setStatus('loading');
     try {
       const { sendSubscribeEvent } = await loadTrackingModule();
       void sendSubscribeEvent({ email });
+      void supabase.from('support_leads').insert({ email, source: 'landing_email' });
       setTimeout(() => {
         setStatus('success');
         setEmail('');
@@ -39,9 +42,14 @@ export default function Home() {
     }
   };
 
-  const handleWhatsAppClick = async () => {
+  const handleWhatsAppClick = async (e) => {
+    if (!phone.trim()) {
+      e.preventDefault();
+      return;
+    }
     const { sendContactEvent } = await loadTrackingModule();
     void sendContactEvent({ phone });
+    void supabase.from('support_leads').insert({ phone, source: 'landing_whatsapp' });
   };
 
   return (
