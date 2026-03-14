@@ -8,6 +8,11 @@ import { createSupabaseAdminClient, isSupabaseConfigured } from "@/lib/supabase"
 import { sendMetaConversionEvent } from "@/lib/tracking/conversionsApi";
 import { leadRequestSchema } from "@/lib/validation/lead";
 
+type PostgrestLikeError = {
+  code?: string;
+  message: string;
+};
+
 function getClientIp(request: Request) {
   const forwardedFor = request.headers.get("x-forwarded-for");
   if (!forwardedFor) {
@@ -15,6 +20,10 @@ function getClientIp(request: Request) {
   }
 
   return forwardedFor.split(",")[0]?.trim();
+}
+
+function isUniqueConstraintError(error: PostgrestLikeError | null) {
+  return error?.code === "23505";
 }
 
 export async function POST(request: Request) {
@@ -77,6 +86,13 @@ export async function POST(request: Request) {
         .insert(record);
 
       if (error) {
+        if (isUniqueConstraintError(error)) {
+          return NextResponse.json(
+            { success: true, savedIn: "supabase", duplicate: true },
+            { status: 200, headers: { "Cache-Control": "no-store" } },
+          );
+        }
+
         throw new Error(error.message);
       }
 

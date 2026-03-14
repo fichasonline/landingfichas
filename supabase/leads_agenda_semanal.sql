@@ -22,8 +22,48 @@ create table if not exists public.leads_agenda_semanal (
   user_agent text
 );
 
+update public.leads_agenda_semanal
+set email = lower(trim(email))
+where email <> lower(trim(email));
+
+with ranked_by_email as (
+  select
+    id,
+    row_number() over (
+      partition by email
+      order by created_at asc, id asc
+    ) as row_num
+  from public.leads_agenda_semanal
+)
+delete from public.leads_agenda_semanal as leads
+using ranked_by_email
+where leads.id = ranked_by_email.id
+  and ranked_by_email.row_num > 1;
+
+with ranked_by_event_id as (
+  select
+    id,
+    row_number() over (
+      partition by event_id
+      order by created_at asc, id asc
+    ) as row_num
+  from public.leads_agenda_semanal
+  where event_id is not null
+)
+delete from public.leads_agenda_semanal as leads
+using ranked_by_event_id
+where leads.id = ranked_by_event_id.id
+  and ranked_by_event_id.row_num > 1;
+
 create index if not exists leads_agenda_semanal_created_at_idx
   on public.leads_agenda_semanal (created_at desc);
 
 create index if not exists leads_agenda_semanal_email_idx
   on public.leads_agenda_semanal (lower(email));
+
+create unique index if not exists leads_agenda_semanal_email_unique_idx
+  on public.leads_agenda_semanal (email);
+
+create unique index if not exists leads_agenda_semanal_event_id_unique_idx
+  on public.leads_agenda_semanal (event_id)
+  where event_id is not null;

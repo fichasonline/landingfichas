@@ -100,6 +100,7 @@ export function LeadForm({
       });
 
       const payload = (await response.json()) as {
+        duplicate?: boolean;
         error?: string;
         success?: boolean;
       };
@@ -108,16 +109,20 @@ export function LeadForm({
         throw new Error(payload.error ?? "No pudimos registrar tu mail.");
       }
 
-      trackLead({
-        eventId,
-        form_id: formId,
-      });
+      if (!payload.duplicate) {
+        trackLead({
+          eventId,
+          form_id: formId,
+        });
+      }
 
       reset(defaultValues);
       trackedStartRef.current = false;
       setSubmitState({
         status: "success",
-        message: "Listo. Ya quedaste registrado para recibir la agenda semanal.",
+        message: payload.duplicate
+          ? "Ese mail ya estaba registrado. No volvimos a cargarlo."
+          : "Listo. Ya quedaste registrado para recibir la agenda semanal.",
       });
     } catch (error) {
       setSubmitState({
@@ -129,6 +134,25 @@ export function LeadForm({
       });
     }
   });
+
+  if (submitState.status === "success") {
+    return (
+      <div className="space-y-5">
+        {title ? (
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold text-white">{title}</h3>
+          </div>
+        ) : null}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-100"
+        >
+          {submitState.message}
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
