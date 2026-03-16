@@ -121,7 +121,7 @@ export function LeadForm({
       setSubmitState({
         status: "success",
         message: payload.duplicate
-          ? "Ese mail ya estaba registrado. No volvimos a cargarlo."
+          ? "Ese email o WhatsApp ya estaba registrado. No volvimos a cargarlo."
           : "Listo. Ya quedaste registrado para recibir la agenda semanal.",
       });
     } catch (error) {

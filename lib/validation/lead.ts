@@ -27,9 +27,32 @@ const optionalUrl = z.preprocess((value) => {
   return value;
 }, z.string().url().max(2048).optional());
 
-const optionalWhatsapp = optionalText(30).refine(
-  (value) => !value || /^[0-9+() -]{8,20}$/.test(value),
-  "Revisa el WhatsApp. Usa solo numeros, espacios y signos comunes.",
+const normalizeWhatsapp = (value: unknown) => {
+  if (value === null || value === undefined) {
+    return undefined;
+  }
+
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+
+    if (trimmed.length === 0) {
+      return undefined;
+    }
+
+    const digitsOnly = trimmed.replace(/\D/g, "");
+    return digitsOnly.length > 0 ? digitsOnly : undefined;
+  }
+
+  return value;
+};
+
+const optionalWhatsapp = z.preprocess(
+  normalizeWhatsapp,
+  z
+    .string()
+    .min(8, "Revisa el WhatsApp. Usa un numero valido.")
+    .max(20, "Revisa el WhatsApp. Usa un numero mas corto.")
+    .optional(),
 );
 
 export const leadFormSchema = z.object({

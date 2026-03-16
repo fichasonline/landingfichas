@@ -11,6 +11,11 @@ const TORNEOS_BG = '/landing/torneos-mobile.jpg';
 
 let trackingModulePromise;
 
+const UNIQUE_VIOLATION_CODE = '23505';
+
+const normalizeEmail = (value) => value.trim().toLowerCase();
+const normalizePhone = (value) => value.replace(/\D/g, '');
+
 const loadTrackingModule = () => {
   if (!trackingModulePromise) {
     trackingModulePromise = import('../services/metaConversions');
@@ -35,13 +40,16 @@ export default function Home() {
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
-    if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) return;
+    const normalizedEmail = normalizeEmail(email);
+    if (!normalizedEmail || !/\S+@\S+\.\S+/.test(normalizedEmail)) return;
     setStatus('loading');
     try {
       const { sendSubscribeEvent } = await loadTrackingModule();
-      void sendSubscribeEvent({ email });
-      supabase.from('support_leads').insert({ email, source: 'landing_email' }).then(({ error }) => {
-        if (error) console.error('Error guardando lead email:', error);
+      void sendSubscribeEvent({ email: normalizedEmail });
+      supabase.from('support_leads').insert({ email: normalizedEmail, source: 'landing_email' }).then(({ error }) => {
+        if (error && error.code !== UNIQUE_VIOLATION_CODE) {
+          console.error('Error guardando lead email:', error);
+        }
       });
       setTimeout(() => {
         setStatus('success');
@@ -56,11 +64,14 @@ export default function Home() {
 
   const handleWhatsAppClick = async (e) => {
     e.preventDefault();
-    if (!phone.trim()) return;
+    const normalizedPhone = normalizePhone(phone);
+    if (!normalizedPhone) return;
     const { sendContactEvent } = await loadTrackingModule();
-    void sendContactEvent({ phone });
-    const { error } = await supabase.from('support_leads').insert({ phone, source: 'landing_whatsapp' });
-    if (error) console.error('Error guardando lead whatsapp:', error);
+    void sendContactEvent({ phone: normalizedPhone });
+    const { error } = await supabase.from('support_leads').insert({ phone: normalizedPhone, source: 'landing_whatsapp' });
+    if (error && error.code !== UNIQUE_VIOLATION_CODE) {
+      console.error('Error guardando lead whatsapp:', error);
+    }
     window.location.href = '/gracias';
   };
 

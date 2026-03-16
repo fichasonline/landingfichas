@@ -53,11 +53,11 @@ Notas:
 ## Conexion con Supabase
 
 1. Crea un proyecto en Supabase.
-2. Ejecuta el SQL de [supabase/leads_agenda_semanal.sql](/Users/franciscosalvatierra/Desarrollo/FichasLanding/supabase/leads_agenda_semanal.sql).
+2. Ejecuta el SQL de [supabase/leads_agenda_semanal.sql](/Users/franciscosalvatierra/Desarrollo/landingfichas/supabase/leads_agenda_semanal.sql).
 3. Copia `SUPABASE_URL`, `SUPABASE_ANON_KEY` y `SUPABASE_SERVICE_ROLE_KEY` en `.env.local`.
 4. Levanta la app y envia un formulario.
 
-La API guarda los leads en la tabla `leads_agenda_semanal`. En desarrollo, si Supabase no esta configurado, hace fallback a `/tmp/leads_agenda_semanal.jsonl` para que puedas probar el flujo completo localmente.
+La API guarda los leads en la tabla `leads_agenda_semanal`. Ese script ya normaliza `email` y `whatsapp`, elimina duplicados existentes y crea indices unicos para que no se repitan. En desarrollo, si Supabase no esta configurado, hace fallback a `/tmp/leads_agenda_semanal.jsonl` para que puedas probar el flujo completo localmente.
 
 ## Tracking y medicion
 

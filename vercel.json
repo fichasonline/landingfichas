@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/gracias",
+      "destination": "/"
+    },
+    {
+      "source": "/politicas-de-privacidad",
+      "destination": "/"
+    }
+  ]
+}
