@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #06060e;
   --foreground: rgba(255, 255, 255, 0.94);
   --muted: rgba(232, 233, 239, 0.68);
   --line: rgba(255, 255, 255, 0.1);
@@ -16,14 +16,14 @@
 
 html {
   background: var(--background);
-  color-scheme: light;
+  color-scheme: dark;
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: #ffffff;
+  background: #06060e;
   color: var(--foreground);
   font-family:
     "Space Grotesk",
@@ -35,17 +35,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body::before {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 34px 34px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.24), transparent 90%);
-  content: "";
-  pointer-events: none;
+@media (min-width: 640px) {
+  body::before {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.24), transparent 90%);
+    content: "";
+    pointer-events: none;
+  }
 }
 
 a {
@@ -104,7 +106,7 @@ input:-webkit-autofill:focus {
   }
 
   .panel {
-    @apply relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 shadow-card backdrop-blur-xl;
+    @apply relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 shadow-card sm:backdrop-blur-md;
   }
 
   .eyebrow {

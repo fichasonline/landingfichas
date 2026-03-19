@@ -68,7 +68,7 @@ export function Hero({ whatsappUrl }: HeroProps) {
             <div className="flex flex-col justify-between gap-10">
               <div className="space-y-6">
                 <motion.div variants={item} className="flex flex-wrap items-center justify-between gap-4">
-                  <div className="eyebrow">Agenda semanal de torneos</div>
+                  <div className="eyebrow">Gratis · Sin spam · Baja cuando quieras</div>
                   <a
                     href="#como-funciona"
                     className="text-sm font-medium text-white/58 transition hover:text-white"
@@ -79,11 +79,10 @@ export function Hero({ whatsappUrl }: HeroProps) {
 
                 <motion.div variants={item} className="space-y-5">
                   <h1 className="max-w-3xl text-4xl font-semibold leading-[1.02] text-white sm:text-5xl lg:text-7xl">
-                    Enterate antes que torneos se juegan esta semana
+                    La agenda de torneos de poker de la semana, en tu mail
                   </h1>
                   <p className="max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
-                    Sumate y recibi por mail una grilla semanal con torneos,
-                    novedades y fechas clave para no quedar afuera de la movida.
+                    Un mail semanal con la grilla completa de torneos, fechas clave y novedades. Sin buscar, sin perderte nada.
                   </p>
                 </motion.div>
 
@@ -124,16 +123,15 @@ export function Hero({ whatsappUrl }: HeroProps) {
                 <div className="mb-5 flex items-center justify-between gap-4 rounded-2xl border border-violet/20 bg-violet/10 px-4 py-3">
                   <div>
                     <p className="text-xs uppercase tracking-[0.22em] text-violet-soft">
-                      Envio semanal
+                      100% gratis · Baja cuando quieras
                     </p>
                     <p className="mt-1 text-sm text-white/70">
-                      Recibis la grilla por mail y despues decidis si queres
-                      hablar por WhatsApp.
+                      Solo necesitas tu mail. Un envio por semana, nada mas.
                     </p>
                   </div>
-                  <div className="rounded-2xl border border-white/12 bg-black/30 px-3 py-2 text-center">
-                    <p className="font-mono text-xs text-white/55">Weekly</p>
-                    <p className="text-lg font-semibold text-white">01x</p>
+                  <div className="rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-3 py-2 text-center">
+                    <p className="font-mono text-xs text-emerald-300">Gratis</p>
+                    <p className="text-lg font-semibold text-white">✓</p>
                   </div>
                 </div>
 

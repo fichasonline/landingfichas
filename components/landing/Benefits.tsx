@@ -35,9 +35,9 @@ export function Benefits() {
         </p>
       </Reveal>
 
-      <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+      <Reveal className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {benefits.map((benefit, index) => (
-          <Reveal
+          <div
             key={benefit.title}
             className={[
               "panel p-5 sm:p-6 lg:p-7",
@@ -55,9 +55,9 @@ export function Benefits() {
             <p className="mt-3 text-sm leading-7 text-white/64 sm:text-base">
               {benefit.description}
             </p>
-          </Reveal>
+          </div>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }
