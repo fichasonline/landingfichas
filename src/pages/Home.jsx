@@ -3,8 +3,8 @@ import { supabase } from '../lib/supabase';
 
 const HERO_BG = '/svg/PORTADA.webp';
 const LOGO_GLOW = '/svg/LOGO%20CON%20LUZ.svg';
-const INFO_BG = 'https://www.figma.com/api/mcp/asset/e8fb845f-35ff-4694-b25d-aff80b692f9e';
-const INFO_OVERLAY = 'https://www.figma.com/api/mcp/asset/d2ac79f0-89fd-43e7-bda2-b85d5c208fc2';
+const INFO_BG = '/svg/PORTADA.png';
+const INFO_OVERLAY = null; // No overlay needed with local image
 const WSP_TOP_PNG = '/landing/whatsapp-top.png';
 const GRILLA_BG = '/landing/grilla-mobile.jpg';
 const TORNEOS_BG = '/landing/torneos-mobile.jpg';
@@ -148,15 +148,17 @@ export default function Home() {
             loading="lazy"
             decoding="async"
           />
-          <img
-            className="info-head-image info-head-image-overlay"
-            src={INFO_OVERLAY}
-            alt=""
-            width="393"
-            height="426"
-            loading="lazy"
-            decoding="async"
-          />
+          {INFO_OVERLAY && (
+            <img
+              className="info-head-image info-head-image-overlay"
+              src={INFO_OVERLAY}
+              alt=""
+              width="393"
+              height="426"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
           <div className="info-head-grid" />
         </div>
         <div className="info-copy">
